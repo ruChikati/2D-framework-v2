@@ -229,6 +229,16 @@ class Vector2:
         else:
             raise TypeError('Vector2 can only be multiplied by lists, tuples (of length 2), int, floats and Vector2s')
 
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)):
+            return Vector2(self.x / other, self.y / other)
+        elif isinstance(other, (list, tuple)) and len(other) == 2:
+            return self.x / other[0] + self.y / other[1]
+        elif isinstance(other, Vector2):
+            return self.x / other.x + self.y / other.y
+        else:
+            raise TypeError('Vector2 can only be divided by lists, tuples (of length 2), int, floats and Vector2s')
+
     def __getitem__(self, item):
         if -1 < item < 2:
             return self.y if item else self.x
