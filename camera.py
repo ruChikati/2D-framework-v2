@@ -80,7 +80,8 @@ class Camera:
         return return_points
 
     def render(self, surf, pos):
-        self._to_blit.append((surf, pos))
+        if not self._locked:
+            self._to_blit.append((surf, pos))
 
     def zoom(self, flt):
         if not self._locked:

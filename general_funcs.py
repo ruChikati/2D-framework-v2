@@ -109,8 +109,8 @@ def colored_text(r, g, b, text):
     return f'\033[38;2;{r};{g};{b}m{text} \033[38;2;255;255;255m'
 
 
-def centre_blit(source, surf, dest=(0, 0)):
-    """Blits the centre of source onte surf at dest"""
+def centre_blit(source: pygame.Surface, surf: pygame.Surface, dest=(0, 0)):
+    """Blits the centre of source onto surf at dest"""
     surf.blit(source, (dest[0] - source.get_width() // 2, dest[1] - source.get_height() // 2))
 
 
@@ -246,14 +246,14 @@ class Vector2:
             raise IndexError('Vector2 index out of range: 0 or 1, index is ' + str(item))
 
     def __iter__(self):
-        self.n = 0
+        self._n = 0
         return self
 
     def __next__(self):
-        if self.n > 1 or self.n < 0:
+        if self._n > 1 or self._n < 0:
             raise StopIteration
-        self.n += 1
-        return self.y if self.n else self.x
+        self._n += 1
+        return self.y if self._n else self.x
 
     def __abs__(self):
         return math.sqrt(self.x ** 2 + self.y ** 2)
@@ -350,7 +350,7 @@ class Vector3:
             self.z = args[2]
         elif len(args) == 1:
             if not isinstance(args[0], (tuple, list)):
-                raise IndexError('Vector3s take 3 int/floats or a list/tuple')
+                raise TypeError('Vector3s take 3 int/floats or a list/tuple')
             self.x, self.y, self.z = args[0]
         else:
             raise IndexError('Vector3s take 3 int/floats or a list/tuple')
@@ -393,20 +393,20 @@ class Vector3:
             raise IndexError('Vector3s only have x, y, z attributes, index is ' + str(item))
 
     def __iter__(self):
-        self.n = 0
+        self._n = 0
         return self
 
     def __next__(self):
-        if self.n > 2 or self.n < 0:
+        if self._n > 2 or self._n < 0:
             raise StopIteration
-        if self.n == 0:
-            self.n += 1
+        if self._n == 0:
+            self._n += 1
             return self.x
-        elif self.n == 1:
-            self.n += 1
+        elif self._n == 1:
+            self._n += 1
             return self.y
-        elif self.n == 2:
-            self.n += 1
+        elif self._n == 2:
+            self._n += 1
             return self.z
 
     def __abs__(self):

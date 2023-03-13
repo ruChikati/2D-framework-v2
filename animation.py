@@ -66,7 +66,7 @@ class Animation:
             self.img = self.frames[-1]
 
     def render(self, surf, pos, offset=(0, 0)):
-        pass
+        pass    # TODO
 
     def play(self, dt, fps=60):
         if not self.paused:
